@@ -4,31 +4,17 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.google.gson.Gson;
 
-@Entity
-@Table(name = "field")
 public class Field implements Verifiable, Serializable, Comparable<Field> {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
+      private Integer id;
 
-  @Column(name="name")
-  private String name;
+    private String name;
 
-  @Column(name="description")
-  private String description;
+    private String description;
 
-  @Transient
-  private List<Rule> rules;
+    private List<Rule> rules;
 
 
   public Field() {

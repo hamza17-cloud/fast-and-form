@@ -4,46 +4,31 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
 
 import com.google.gson.Gson;
 
 import org.springframework.data.annotation.Id;
 
-@Entity
-@Table(name = "file")
 public class ParameterFile implements Serializable, Comparable<ParameterFile> {
   
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private String name;
 
-  @Column(name="description")
   private String description;
 
-  @Column(name="forms")
   private List<Form> forms;
 
-  @Column(name="groups")
   private List<Group> groups;
 
-  @Column(name="field")
   private List<Field> fields;
 
-  @Column(name="localizations")
   private List<Localization> localizations;
 
-  @Column(name="entities")
-  private List<Entity> entities;
+  private List<EntityTemplate> entities;
 
   public ParameterFile() {
   }
 
-  public ParameterFile(String name, String description, List<Form> forms, List<Group> groups, List<Field> fields, List<Localization> localizations, List<Entity> entities) {
+  public ParameterFile(String name, String description, List<Form> forms, List<Group> groups, List<Field> fields, List<Localization> localizations, List<EntityTemplate> entities) {
     this.name = name;
     this.description = description;
     this.forms = forms;
@@ -101,11 +86,11 @@ public class ParameterFile implements Serializable, Comparable<ParameterFile> {
     this.localizations = localizations;
   }
 
-  public List<Entity> getEntities() {
+  public List<EntityTemplate> getEntities() {
     return this.entities;
   }
 
-  public void setEntities(List<Entity> entities) {
+  public void setEntities(List<EntityTemplate> entities) {
     this.entities = entities;
   }
 
@@ -139,7 +124,7 @@ public class ParameterFile implements Serializable, Comparable<ParameterFile> {
     return this;
   }
 
-  public ParameterFile entities(List<Entity> entities) {
+  public ParameterFile entities(List<EntityTemplate> entities) {
     setEntities(entities);
     return this;
   }

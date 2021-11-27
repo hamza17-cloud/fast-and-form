@@ -4,27 +4,13 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.MapKey;
-import javax.persistence.OneToMany;
 
 import com.google.gson.Gson;
 
 public class Localization implements Serializable, Comparable<Localization> {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+
   private Integer id;
 
-  @OneToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "localization_entry", 
-    joinColumns = {@JoinColumn(name = "localization_id", referencedColumnName = "id")},
-    inverseJoinColumns = {@JoinColumn(name = "localization_entry_id", referencedColumnName = "id")})
-  @MapKey(name = "itemName")
   private Map<String, LocalizationEntry> entries;
 
 

@@ -3,19 +3,10 @@ package fr.utbm.da50.fastandform.core.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "rule")
 public abstract class Rule implements Verifiable, Serializable, Comparable<Rule> {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  
   private Integer id;
-
 
   public Rule() {
   }

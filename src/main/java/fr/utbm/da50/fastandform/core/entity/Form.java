@@ -4,37 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.google.gson.Gson;
 
-@Entity
-@Table(name="form")
 public class Form implements Serializable, Comparable<Form> {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
+      private Integer id;
 
-  @Column(name="name")
-  private String name;
+    private String name;
 
-  @Column(name="description")
-  private String description;
+    private String description;
 
 
-  @Column(name="forms")
-  private List<Form> forms;
+    private List<Form> forms;
 
-  @Column(name="groups")
-  private List<Group> groups;
+    private List<Group> groups;
 
-  @Column(name="field")
-  private List<Field> fields;
+    private List<Field> fields;
 
 
   public Form() {
