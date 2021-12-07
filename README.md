@@ -16,7 +16,10 @@ spring.data.mongodb.password=<password>
 allowed.origin=http://<app_host>:<app_port>
 ```
 allowed.origin is a sequence of URLs allowing browsers to do CORS request to the backend
-
+## ajouter des valeur pour notre Users 
+dans applaction.properties
+app.<nomDuChamp>
+exemple : app.firstName=toto
 ## How to install
 
 Install maven and setup project:
