@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -18,12 +19,16 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import fr.utbm.da50.fastandform.core.entity.Users;
+import fr.utbm.da50.fastandform.core.service.EntityService;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
 	Users.class
 })
 public class CoreApplication {
+
+    @Value("entities_location")
+    private static String[] entities_location;
 
 	@Autowired
 	private Users usersInstance;
@@ -32,7 +37,10 @@ public class CoreApplication {
 	public void init() {
 		users=usersInstance;
 	}
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+            EntityService.setEntitiesLocation(entities_location);
+            System.out.println(entities_location);
+            EntityService.loadEntities();
             SpringApplication.run(CoreApplication.class, args);
             System.out.println(users.getFirstName());
     }

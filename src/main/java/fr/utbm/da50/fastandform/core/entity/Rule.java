@@ -1,12 +1,17 @@
 package fr.utbm.da50.fastandform.core.entity;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Objects;
 
 
 public abstract class Rule implements Verifiable, Serializable, Comparable<Rule> {
   
   private Integer id;
+
+  private String type;
+
+  private Map<String, Object> options;
 
   public Rule() {
   }
@@ -26,6 +31,23 @@ public abstract class Rule implements Verifiable, Serializable, Comparable<Rule>
   public Rule id(Integer id) {
     setId(id);
     return this;
+  }
+
+
+  public String getType() {
+    return this.type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public Map<String,Object> getOptions() {
+    return this.options;
+  }
+
+  public void setOptions(Map<String,Object> options) {
+    this.options = options;
   }
 
   @Override
