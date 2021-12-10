@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public abstract class Rule implements Verifiable, Serializable, Comparable<Rule> {
+public class Rule implements Verifiable, Serializable, Comparable<Rule> {
   
-  private Integer id;
+  private String id;
 
   private String type;
 
@@ -16,21 +16,12 @@ public abstract class Rule implements Verifiable, Serializable, Comparable<Rule>
   public Rule() {
   }
 
-  public Rule(Integer id) {
-    this.id = id;
-  }
-
-  public Integer getId() {
+  public String getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(String id) {
     this.id = id;
-  }
-
-  public Rule id(Integer id) {
-    setId(id);
-    return this;
   }
 
 
@@ -64,5 +55,31 @@ public abstract class Rule implements Verifiable, Serializable, Comparable<Rule>
   @Override
   public int hashCode() {
     return Objects.hashCode(id);
+  }
+  
+
+  @Override
+  public String toString() {
+    return "{" +
+      " id='" + getId() + "'" +
+      ", type='" + getType() + "'" +
+      ", options='" + getOptions() + "'" +
+      "}";
+  }
+
+
+  @Override
+  public void verify() throws Exception {
+    throw new Exception("Abstract class");
+  }
+
+  /**
+   * Compares the two rules
+   * @author TheRolf
+   * ID Must be unique, because they are supposed to reusable
+   */
+  @Override
+  public int compareTo(Rule o) {
+    return this.getId().compareTo(o.getId());
   }
 }

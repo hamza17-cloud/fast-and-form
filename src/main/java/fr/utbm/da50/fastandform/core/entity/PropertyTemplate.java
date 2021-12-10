@@ -1,19 +1,22 @@
 package fr.utbm.da50.fastandform.core.entity;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class PropertyTemplate {
   private String type;
 
-  private HashMap<String,Rule> rules;
+  private List<Rule> rules;
 
-  public PropertyTemplate() {
+  public List<Rule> getRules() {
+    return this.rules;
   }
 
-  public PropertyTemplate(String type, HashMap<String,Rule> rules) {
-    this.type = type;
+  public void setRules(List<Rule> rules) {
     this.rules = rules;
+  }
+
+  public PropertyTemplate() {
   }
 
   public String getType() {
@@ -22,24 +25,6 @@ public class PropertyTemplate {
 
   public void setType(String type) {
     this.type = type;
-  }
-
-  public HashMap<String,Rule> getRules() {
-    return this.rules;
-  }
-
-  public void setRules(HashMap<String,Rule> rules) {
-    this.rules = rules;
-  }
-
-  public PropertyTemplate type(String type) {
-    setType(type);
-    return this;
-  }
-
-  public PropertyTemplate rules(HashMap<String,Rule> rules) {
-    setRules(rules);
-    return this;
   }
 
   @Override
