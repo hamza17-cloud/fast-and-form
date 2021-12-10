@@ -2,9 +2,7 @@ package fr.utbm.da50.fastandform.core;
 
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Component

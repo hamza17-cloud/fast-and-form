@@ -7,8 +7,6 @@ import java.util.Objects;
 
 import com.google.gson.Gson;
 
-import org.springframework.data.annotation.Id;
-
 public class ParameterFile implements Serializable, Comparable<ParameterFile> {
   
   private String name;
