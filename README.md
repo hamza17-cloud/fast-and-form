@@ -14,6 +14,8 @@ spring.data.mongodb.database=<db_name>
 spring.data.mongodb.username=<user>
 spring.data.mongodb.password=<password>
 allowed.origin=http://<app_host>:<app_port>
+
+ff.entities_location=src/main/resources/user_entity.json,src/main/resources/user_entity.json
 ```
 allowed.origin is a sequence of URLs allowing browsers to do CORS request to the backend
 ## ajouter des valeur pour notre Users 
