@@ -1,4 +1,4 @@
-package fr.utbm.da50.fastandform.core.service;
+package fr.utbm.da50.fastandform.core.Service;
 import java.io.FileReader;
 import java.util.HashMap;
 

@@ -13,7 +13,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import fr.utbm.da50.fastandform.core.service.EntityService;
+import fr.utbm.da50.fastandform.core.Service.EntityService;
 
 @SpringBootApplication
 public class CoreApplication {
