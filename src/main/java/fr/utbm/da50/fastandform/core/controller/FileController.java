@@ -24,22 +24,27 @@ class FileController {
 
   @Autowired
   private GeneralRepository generalRepository;
+  @Autowired
   private EntityService entityService;
+
+  public FileController(EntityService entityService) {
+    this.entityService = entityService;
+  }
 
   // exemple : http://localhost:8080/fastandform/users
   @GetMapping(value = "/{DatabaseName}/{CollectionName}", produces = MediaType.APPLICATION_JSON_VALUE)
   public String findAll(@PathVariable String DatabaseName, @PathVariable String CollectionName) {
-    // return entityService.findAllDocuments(DatabaseName,
+    return entityService.findAllDocuments(DatabaseName, CollectionName).toString();
+    // return generalRepository.findAllDocuments(DatabaseName,
     // CollectionName).toString();
-    return generalRepository.findAllDocuments(DatabaseName, CollectionName).toString();
   }
 
   // exemple : http://localhost:8080/fastandform/users/207471947662098432
   @GetMapping(value = "/{DatabaseName}/{CollectionName}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public String findById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
       @PathVariable String id) {
-    // return entityService.findOneDocumentById(DatabaseName, CollectionName,
+    return entityService.findOneDocumentById(DatabaseName, CollectionName, id).toString();
+    // return generalRepository.findOneDocumentById(DatabaseName, CollectionName,
     // id).toString();
-    return generalRepository.findOneDocumentById(DatabaseName, CollectionName, id).toString();
   }
 }

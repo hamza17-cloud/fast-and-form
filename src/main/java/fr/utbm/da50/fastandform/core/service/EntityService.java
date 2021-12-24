@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.utbm.da50.fastandform.core.FastAndFormSettings;
@@ -14,7 +15,7 @@ import fr.utbm.da50.fastandform.core.repository.GeneralRepository;
 
 @Service
 public class EntityService {
-
+  @Autowired
   private GeneralRepository generalRepository;
 
   private static String[] entitiesLocation;
@@ -72,6 +73,7 @@ public class EntityService {
   }
 
   public String findAllDocuments(String DatabaseName, String CollectionName) {
+
     return generalRepository.findAllDocuments(DatabaseName, CollectionName).toString();
   }
 
