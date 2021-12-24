@@ -1,21 +1,28 @@
 package fr.utbm.da50.fastandform.core.service;
+
 import java.io.FileReader;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
+import org.springframework.stereotype.Service;
+
 import fr.utbm.da50.fastandform.core.FastAndFormSettings;
 import fr.utbm.da50.fastandform.core.entity.EntityTemplate;
+import fr.utbm.da50.fastandform.core.repository.GeneralRepository;
 
+@Service
 public class EntityService {
+
+  private GeneralRepository generalRepository;
 
   private static String[] entitiesLocation;
 
   private static HashMap<String, EntityTemplate> entities;
-  
+
   public static void setEntitiesLocation(String values) {
-    if(entitiesLocation == null){
+    if (entitiesLocation == null) {
       entitiesLocation = values.split(",");
     }
   }
@@ -25,22 +32,23 @@ public class EntityService {
   }
 
   public static void loadEntities() throws Exception {
-    if(entities != null) return;
+    if (entities != null)
+      return;
 
     HashMap<String, EntityTemplate> result = new HashMap<>();
 
-    if(entitiesLocation == null) {
+    if (entitiesLocation == null) {
       entitiesLocation = FastAndFormSettings.getInstance().getEntitiesLocation();
     }
-    
+
     EntityTemplate tmp;
-    for(String location : entitiesLocation) {
+    for (String location : entitiesLocation) {
       tmp = loadEntity(location);
       result.put(tmp.getName(), tmp);
     }
     entities = result;
     System.out.println(entities);
-  } 
+  }
 
   public static EntityTemplate loadEntity(String location) throws Exception {
     Gson gson = new Gson();
@@ -54,11 +62,20 @@ public class EntityService {
 
     EntityTemplate result = entities.get(entityName);
 
-    if(result == null) throw new Exception("Could not find entity " + entityName);
+    if (result == null)
+      throw new Exception("Could not find entity " + entityName);
 
     return result;
   }
 
   public EntityService() {
+  }
+
+  public String findAllDocuments(String DatabaseName, String CollectionName) {
+    return generalRepository.findAllDocuments(DatabaseName, CollectionName).toString();
+  }
+
+  public String findOneDocumentById(String DatabaseName, String CollectionName, String id) {
+    return generalRepository.findOneDocumentById(DatabaseName, CollectionName, id).toString();
   }
 }
