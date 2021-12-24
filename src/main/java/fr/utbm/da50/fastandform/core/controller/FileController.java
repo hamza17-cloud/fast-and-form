@@ -1,5 +1,10 @@
 package fr.utbm.da50.fastandform.core.controller;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.utbm.da50.fastandform.core.repository.GeneralRepository;
@@ -46,5 +52,22 @@ class FileController {
     return entityService.findOneDocumentById(DatabaseName, CollectionName, id).toString();
     // return generalRepository.findOneDocumentById(DatabaseName, CollectionName,
     // id).toString();
+  }
+
+  @GetMapping(value = "/param/{DatabaseName}/{CollectionName}", produces = MediaType.APPLICATION_JSON_VALUE)
+  // exemple : http://localhost:8080/test?id=12
+  public String test(@PathVariable String DatabaseName, @PathVariable String CollectionName,
+      @RequestParam Map<String, String> dataQuery) {
+
+    Set<String> name = dataQuery.keySet();
+    Collection<String> valeur = dataQuery.values();
+    System.out.println(name.iterator().next());
+    System.out.println(valeur.iterator().next());
+    String n = name.iterator().next();
+    String v = valeur.iterator().next();
+    return generalRepository
+        .findOneDocumentBy(DatabaseName, CollectionName, n, v).toString();
+
+    // return dataQuery.toString();
   }
 }

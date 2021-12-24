@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class GeneralRepository {
- // private static final String DatabaseName = "fastandform";
-  //private static final String CollectionName = "users";
+  // private static final String DatabaseName = "fastandform";
+  // private static final String CollectionName = "users";
 
   @Autowired
   private MongoClient client;
@@ -23,11 +23,17 @@ public class GeneralRepository {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
     data.find().map(Document::toJson).forEach(list::add);
     return list;
-}
+  }
 
   public String findOneDocumentById(String DatabaseName, String CollectionName, String id) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
     Document myDoc = data.find(eq("id", id)).first();
     return myDoc.toJson();
-}
+  }
+
+  public String findOneDocumentBy(String DatabaseName, String CollectionName, String key, String val) {
+    final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
+    Document myDoc = data.find(eq(key, val)).first();
+    return myDoc.toJson();
+  }
 }
