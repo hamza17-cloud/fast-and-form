@@ -34,6 +34,7 @@ public class GeneralRepository {
 
   public List<String> findOneDocumentBy(String DatabaseName, String CollectionName, String key, String val) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
+
     FindIterable<Document> docs = data.find(eq(key, val));
     List<String> list = new ArrayList<>();
     for (Document document : docs) {
