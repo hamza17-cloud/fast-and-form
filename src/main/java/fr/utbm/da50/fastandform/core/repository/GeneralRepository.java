@@ -38,7 +38,7 @@ public class GeneralRepository {
     FindIterable<Document> docs = data.find(eq(key, val));
     List<String> list = new ArrayList<>();
     for (Document document : docs) {
-      System.out.println(document.toJson());
+
       list.add(document.toJson());
     }
     return list;
