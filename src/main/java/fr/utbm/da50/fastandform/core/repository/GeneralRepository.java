@@ -3,6 +3,7 @@ package fr.utbm.da50.fastandform.core.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.*;
@@ -31,9 +32,14 @@ public class GeneralRepository {
     return myDoc.toJson();
   }
 
-  public String findOneDocumentBy(String DatabaseName, String CollectionName, String key, String val) {
+  public List<String> findOneDocumentBy(String DatabaseName, String CollectionName, String key, String val) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
-    Document myDoc = data.find(eq(key, val)).first();
-    return myDoc.toJson();
+    FindIterable<Document> docs = data.find(eq(key, val));
+    List<String> list = new ArrayList<>();
+    for (Document document : docs) {
+      System.out.println(document.toJson());
+      list.add(document.toJson());
+    }
+    return list;
   }
 }
