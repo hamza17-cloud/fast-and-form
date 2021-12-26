@@ -79,11 +79,11 @@ public class EntityService {
   public String findOneDocumentById(String DatabaseName, String CollectionName, String id) {
     return generalRepository.findOneDocumentById(DatabaseName, CollectionName, id).toString();
   }
-  public String DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String id) {
-    return generalRepository.DeleteOneDocByspecificID(DatabaseName, CollectionName, id).toString();
+  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String id) {
+     generalRepository.DeleteOneDocByspecificID(DatabaseName, CollectionName, id);
   }
-  public String DeleteManyDocMatchingSpecificID(String DatabaseName, String CollectionName, String id) {
-    return generalRepository.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, id).toString();
+  public void DeleteManyDocMatchingSpecificID(String DatabaseName, String CollectionName, String id) {
+  generalRepository.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, id);
   }
   
 

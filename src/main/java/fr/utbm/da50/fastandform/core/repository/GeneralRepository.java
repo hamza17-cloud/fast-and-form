@@ -32,9 +32,9 @@ public class GeneralRepository {
     Document myDoc = data.find(eq("id", id)).first();
     return myDoc.toJson();
   }
-  public String DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String id) {
+  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String id) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
-    Document myDoc = data.find(eq("id", id)).first();
+ 
     try  {
       data.deleteOne(new Document ("id",id));  
      long count= data.countDocuments();
@@ -46,11 +46,11 @@ public class GeneralRepository {
     }
   
 
-    return myDoc.toJson();
+  
   }
-  public String DeleteManyDocMatchingSpecificID(String DatabaseName, String CollectionName, String username) {
+  public void DeleteManyDocMatchingSpecificID(String DatabaseName, String CollectionName, String username) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
-    Document myDoc = data.find(eq("username", username)).first();
+    
     try  {
       data.deleteMany(new Document ("username",username));
       long count= data.countDocuments();
@@ -62,7 +62,7 @@ public class GeneralRepository {
     }
   
 
-    return myDoc.toJson();
+   
   }
   
 

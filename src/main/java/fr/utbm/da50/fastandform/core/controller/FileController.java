@@ -46,18 +46,22 @@ class FileController {
     // return generalRepository.findOneDocumentById(DatabaseName, CollectionName,
     // id).toString();
   }
+
 //exp : it will delete the first matching id in the url
-  @GetMapping(value = "/delete/{DatabaseName}/{CollectionName}/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public String DeleteOneDocById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
+//http://localhost:8080/delete/fastandform/users/207471947662098432
+  @GetMapping(value = "/delete/{DatabaseName}/{CollectionName}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public void DeleteOneDocById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
       @PathVariable String id) {
-    return entityService.DeleteOneDocByspecificID(DatabaseName, CollectionName, id).toString();
+   entityService.DeleteOneDocByspecificID(DatabaseName, CollectionName, id);
 
   }
   // exp: if we have two matching usernames  in different docs it will delete both
-  @GetMapping(value = "/delete/{DatabaseName}/{CollectionName}/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public String DeleteManyDocById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
-      @PathVariable String username) {
-    return entityService.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, username).toString();
+  //http://localhost:8080/Delete/fastandform/users/207471947662098432
+  //P.S:To delete all documents in a collection, pass in an empty document ({ })
+  @GetMapping(value = "/Delete/{DatabaseName}/{CollectionName}/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public void DeleteManyDocById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
+      @PathVariable String username) { 
+ entityService.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, username);
 
   }
 
