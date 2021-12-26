@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.utbm.da50.fastandform.core.repository.GeneralRepository;
-import fr.utbm.da50.fastandform.core.service.EntityService;
+import fr.utbm.da50.fastandform.core.Service.EntityService;
 
 @RestController
 class FileController {
@@ -46,6 +46,21 @@ class FileController {
     // return generalRepository.findOneDocumentById(DatabaseName, CollectionName,
     // id).toString();
   }
+//exp : it will delete the first matching id in the url
+  @GetMapping(value = "/delete/{DatabaseName}/{CollectionName}/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public String DeleteOneDocById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
+      @PathVariable String id) {
+    return entityService.DeleteOneDocByspecificID(DatabaseName, CollectionName, id).toString();
+
+  }
+  // exp: if we have two matching usernames  in different docs it will delete both
+  @GetMapping(value = "/delete/{DatabaseName}/{CollectionName}/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public String DeleteManyDocById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
+      @PathVariable String username) {
+    return entityService.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, username).toString();
+
+  }
+
 
   @GetMapping(value = "/param/{DatabaseName}/{CollectionName}", produces = MediaType.APPLICATION_JSON_VALUE)
   // exemple : http://localhost:8080/param/fastandform/users?type=Developer
@@ -64,14 +79,5 @@ class FileController {
     // return dataQuery.toString();
   }
 
-  @DeleteMapping("/delete/{DatabaseName}/{CollectionName}/{firstName}")
-  public String delete(@PathVariable String DatabaseName, @PathVariable String CollectionName,
-      @PathVariable String firstName) {
-
-    return null;
-    // return generalRepository.DeleteID(DatabaseName, CollectionName,
-    // firstName).toString();
-
-  }
 
 }
