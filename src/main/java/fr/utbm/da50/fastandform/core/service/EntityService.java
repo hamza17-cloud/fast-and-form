@@ -3,6 +3,8 @@ package fr.utbm.da50.fastandform.core.service;
 import java.io.FileReader;
 import java.util.HashMap;
 
+import javax.annotation.PostConstruct;
+
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
@@ -15,34 +17,38 @@ import fr.utbm.da50.fastandform.core.repository.GeneralRepository;
 
 @Service
 public class EntityService {
-  @Autowired
-  private GeneralRepository generalRepository;
-  private static String[] entitiesLocation;
 
   private static HashMap<String, EntityTemplate> entities;
 
-  public static void setEntitiesLocation(String values) {
-    if (entitiesLocation == null) {
-      entitiesLocation = values.split(",");
-    }
+  public EntityService() {
   }
 
-  public static String[] getEntitiesLocation() {
-    return entitiesLocation;
+  @Autowired
+  private GeneralRepository generalRepository;
+
+  @Autowired
+  FastAndFormSettings fastAndFormSettings;
+
+  // You cannot load entities inside the constructor because Spring didn't assigned the beans yet. When you need, is call a mathod after,
+  // hopefully javax Post construct annotaion is called after the autowire
+  // https://stackoverflow.com/questions/44681142/postconstruct-annotation-and-spring-lifecycle/44681477
+  @PostConstruct
+  public void postConstruct() throws Exception {
+      this.loadEntities();
   }
 
-  public static void loadEntities() throws Exception {
+  public String[] getEntitiesLocation() {
+    return fastAndFormSettings.getEntitiesLocation();
+  }
+
+  public void loadEntities() throws Exception {
     if (entities != null)
       return;
 
     HashMap<String, EntityTemplate> result = new HashMap<>();
 
-    if (entitiesLocation == null) {
-      entitiesLocation = FastAndFormSettings.getInstance().getEntitiesLocation();
-    }
-
     EntityTemplate tmp;
-    for (String location : entitiesLocation) {
+    for (String location : getEntitiesLocation()) {
       tmp = loadEntity(location);
       result.put(tmp.getName(), tmp);
     }
@@ -66,9 +72,6 @@ public class EntityService {
       throw new Exception("Could not find entity " + entityName);
 
     return result;
-  }
-
-  public EntityService() {
   }
 
   public String findAllDocuments(String DatabaseName, String CollectionName) {

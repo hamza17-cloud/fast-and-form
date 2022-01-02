@@ -6,23 +6,17 @@ import java.util.stream.Collectors;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import fr.utbm.da50.fastandform.core.service.EntityService;
-
 @SpringBootApplication
 public class CoreApplication {
 
     public static void main(String[] args) throws Exception {
-        ConfigurableApplicationContext context = SpringApplication.run(CoreApplication.class, args);
-        FastAndFormSettings settings = context.getBean(FastAndFormSettings.class);
-        FastAndFormSettings.setInstance(settings);
-        EntityService.loadEntities();
+        SpringApplication.run(CoreApplication.class, args);
     }
 
     @Bean

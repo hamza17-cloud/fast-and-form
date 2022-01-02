@@ -3,9 +3,11 @@ package fr.utbm.da50.fastandform.core;
 import java.util.Objects;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+// common wya to build complex configuration files
+// https://www.youtube.com/watch?v=z8kfFbfGGME
+@Configuration
 @ConfigurationProperties(prefix="ff")
 public class FastAndFormSettings {
 
