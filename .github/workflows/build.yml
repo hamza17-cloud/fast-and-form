@@ -1,5 +1,5 @@
 name: Maven build
-description: "Creates artifact from code and pom.xml and uploads it "
+# Creates artifact from code and pom.xml and uploads it
 
 on:
   workflow_dispatch:
