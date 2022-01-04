@@ -30,5 +30,4 @@ public class CoreApplication {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-
 }

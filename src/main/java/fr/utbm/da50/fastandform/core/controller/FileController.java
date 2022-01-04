@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import fr.utbm.da50.fastandform.core.repository.GeneralRepository;
-import fr.utbm.da50.fastandform.core.Service.EntityService;
+import fr.utbm.da50.fastandform.core.service.EntityService;
 
 @RestController
 class FileController {
