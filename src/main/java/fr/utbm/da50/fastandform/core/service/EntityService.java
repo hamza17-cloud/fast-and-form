@@ -101,5 +101,10 @@ public class EntityService {
   public String findOneDocumentBy(String DatabaseName, String CollectionName, String n, String v) {
     return generalRepository.findOneDocumentBy(DatabaseName, CollectionName, n, v).toString();
   }
+
+public void UpdateOneDocument(String DatabaseName, String CollectionName, HashMap<String, Object> map,
+        Integer id) {
+         writerep.UpdateOneDocument(DatabaseName, CollectionName, map, id); 
+}
   
 }
