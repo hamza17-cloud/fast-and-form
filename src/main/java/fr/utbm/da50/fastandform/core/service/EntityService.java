@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import fr.utbm.da50.fastandform.core.FastAndFormSettings;
 import fr.utbm.da50.fastandform.core.entity.EntityTemplate;
 import fr.utbm.da50.fastandform.core.repository.GeneralRepository;
+import fr.utbm.da50.fastandform.core.repository.WriteRepository;
 
 @Service
 public class EntityService {
@@ -28,14 +29,18 @@ public class EntityService {
   private GeneralRepository generalRepository;
 
   @Autowired
+  private WriteRepository writerep;
+
+  @Autowired
   FastAndFormSettings fastAndFormSettings;
 
-  // You cannot load entities inside the constructor because Spring didn't assigned the beans yet. When you need, is call a mathod after,
+  // You cannot load entities inside the constructor because Spring didn't
+  // assigned the beans yet. When you need, is call a mathod after,
   // hopefully javax Post construct annotaion is called after the autowire
   // https://stackoverflow.com/questions/44681142/postconstruct-annotation-and-spring-lifecycle/44681477
   @PostConstruct
   public void postConstruct() throws Exception {
-      this.loadEntities();
+    this.loadEntities();
   }
 
   public String[] getEntitiesLocation() {
@@ -83,12 +88,20 @@ public class EntityService {
   public String findOneDocumentById(String DatabaseName, String CollectionName, String id) {
     return generalRepository.findOneDocumentById(DatabaseName, CollectionName, id).toString();
   }
+<<<<<<< HEAD
   public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String username) {
      generalRepository.DeleteOneDocByspecificID(DatabaseName, CollectionName, username);
+=======
+
+  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String id) {
+    generalRepository.DeleteOneDocByspecificID(DatabaseName, CollectionName, id);
+>>>>>>> 596c2ca2d60f7d67c307d38aee317188302bff19
   }
+
   public void DeleteManyDocMatchingSpecificID(String DatabaseName, String CollectionName, String id) {
-  generalRepository.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, id);
+    generalRepository.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, id);
   }
+<<<<<<< HEAD
   public void DeleteByRecord(String DatabaseName, String CollectionName, String k, String v ,Map<String, String> dataQuery) {
     generalRepository.DeleteMatchingRecordsBy(DatabaseName, CollectionName, k, v, dataQuery);
     }
@@ -96,10 +109,20 @@ public class EntityService {
     generalRepository.DeleteMatchingRecordsBy(DatabaseName, CollectionName, k, v, dataQuery);
     }
   
+=======
+>>>>>>> 596c2ca2d60f7d67c307d38aee317188302bff19
 
-
-  public String findOneDocumentBy(String DatabaseName, String CollectionName, String n, String v) {
-    return generalRepository.findOneDocumentBy(DatabaseName, CollectionName, n, v).toString();
+  public void SaveDocument(String DatabaseName, String CollectionName, HashMap<String, Object> mappingData) {
+    writerep.SaveOneDocument(DatabaseName, CollectionName, mappingData);
   }
-  
+
+  public String findListDocumentBy(String DatabaseName, String CollectionName, String n, String v) {
+    return generalRepository.findListDocumentBy(DatabaseName, CollectionName, n, v).toString();
+  }
+
+  public void UpdateOneDocument(String DatabaseName, String CollectionName, HashMap<String, Object> map,
+      Integer id) {
+    writerep.UpdateOneDocument(DatabaseName, CollectionName, map, id);
+  }
+
 }
