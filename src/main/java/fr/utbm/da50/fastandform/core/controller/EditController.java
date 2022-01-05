@@ -48,7 +48,7 @@ class EditController {
 
         //Write the data in Database
         if("ok".equals(res)){
-        writerep.SaveOneDocument(DatabaseName, CollectionName, mappingData);
+          entityservice.SaveDocument(DatabaseName, CollectionName, mappingData);
         }
 
         return res;

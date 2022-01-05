@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import fr.utbm.da50.fastandform.core.FastAndFormSettings;
 import fr.utbm.da50.fastandform.core.entity.EntityTemplate;
 import fr.utbm.da50.fastandform.core.repository.GeneralRepository;
+import fr.utbm.da50.fastandform.core.repository.WriteRepository;
 
 @Service
 public class EntityService {
@@ -25,6 +26,9 @@ public class EntityService {
 
   @Autowired
   private GeneralRepository generalRepository;
+
+  @Autowired
+  private WriteRepository writerep;
 
   @Autowired
   FastAndFormSettings fastAndFormSettings;
@@ -89,7 +93,10 @@ public class EntityService {
   generalRepository.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, id);
   }
   
-
+  public void SaveDocument(String DatabaseName, String CollectionName, HashMap<String, Object> mappingData){
+    writerep.SaveOneDocument(DatabaseName, CollectionName, mappingData);
+  }
+  
 
   public String findOneDocumentBy(String DatabaseName, String CollectionName, String n, String v) {
     return generalRepository.findOneDocumentBy(DatabaseName, CollectionName, n, v).toString();

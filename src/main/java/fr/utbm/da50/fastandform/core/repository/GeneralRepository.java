@@ -1,10 +1,10 @@
 package fr.utbm.da50.fastandform.core.repository;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -12,7 +12,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.UpdateResult;
 
-import static com.mongodb.client.model.Filters.*;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

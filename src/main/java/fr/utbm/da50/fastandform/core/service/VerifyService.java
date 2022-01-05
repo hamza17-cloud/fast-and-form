@@ -1,11 +1,7 @@
 package fr.utbm.da50.fastandform.core.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.stereotype.Service;
 
@@ -69,7 +65,6 @@ public class VerifyService {
       if(!a){return "Non respect des règle";}
 
     }
-
     return "ok";
   }
 
