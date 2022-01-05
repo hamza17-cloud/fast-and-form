@@ -1,7 +1,8 @@
-package fr.utbm.da50.fastandform.core.Service;
+package fr.utbm.da50.fastandform.core.service;
 
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -82,12 +83,18 @@ public class EntityService {
   public String findOneDocumentById(String DatabaseName, String CollectionName, String id) {
     return generalRepository.findOneDocumentById(DatabaseName, CollectionName, id).toString();
   }
-  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String id) {
-     generalRepository.DeleteOneDocByspecificID(DatabaseName, CollectionName, id);
+  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String username) {
+     generalRepository.DeleteOneDocByspecificID(DatabaseName, CollectionName, username);
   }
   public void DeleteManyDocMatchingSpecificID(String DatabaseName, String CollectionName, String id) {
   generalRepository.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, id);
   }
+  public void DeleteByRecord(String DatabaseName, String CollectionName, String k, String v ,Map<String, String> dataQuery) {
+    generalRepository.DeleteMatchingRecordsBy(DatabaseName, CollectionName, k, v, dataQuery);
+    }
+  public void DeleteByManyRecords(String DatabaseName, String CollectionName, String k, String v ,Map<String, String> dataQuery) {
+    generalRepository.DeleteMatchingRecordsBy(DatabaseName, CollectionName, k, v, dataQuery);
+    }
   
 
 
