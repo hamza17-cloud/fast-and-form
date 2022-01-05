@@ -22,6 +22,7 @@ public class EntityService {
   private static HashMap<String, EntityTemplate> entities;
 
   public EntityService() {
+    // TODO document why this constructor is empty
   }
 
   @Autowired
@@ -103,8 +104,8 @@ public class EntityService {
   }
 
 public void UpdateOneDocument(String DatabaseName, String CollectionName, HashMap<String, Object> map,
-        Integer id) {
-         writerep.UpdateOneDocument(DatabaseName, CollectionName, map, id); 
+        String id, String key) {
+         writerep.UpdateOneDocument(DatabaseName, CollectionName, map, id, key); 
 }
   
 }

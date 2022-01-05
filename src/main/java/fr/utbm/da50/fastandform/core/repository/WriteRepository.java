@@ -1,5 +1,6 @@
 
 package fr.utbm.da50.fastandform.core.repository;
+import static com.mongodb.client.model.Filters.eq;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,9 @@ import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+
+import com.mongodb.client.model.Filters;
 
 @Repository
 public class WriteRepository{
@@ -30,8 +34,14 @@ public class WriteRepository{
     data.insertOne((new Document(map)));
   }
 
-  public void UpdateOneDocument(String DateBaseName, String CollectionName, HashMap<String, Object> map,Integer id){
-    //
+  public void UpdateOneDocument(String DateBaseName, String CollectionName, HashMap<String, Object> map,String id,String key){
+    final MongoCollection<Document> data = client.getDatabase(DateBaseName).getCollection(CollectionName);
+    Document myDoc = data.find(eq(key, id)).first();
+
+    // if( myDoc == null){
+    //   data.insertOne((new Document(map)));
+    // } 
+    // data.updateOne(Filters.eq(key, id), myDoc);
   }
 
 }

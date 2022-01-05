@@ -1,11 +1,5 @@
 package fr.utbm.da50.fastandform.core.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import fr.utbm.da50.fastandform.core.repository.WriteRepository;
-import fr.utbm.da50.fastandform.core.service.EntityService;
-import fr.utbm.da50.fastandform.core.service.VerifyService;
-
 import java.util.HashMap;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,7 +8,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import fr.utbm.da50.fastandform.core.service.EntityService;
+import fr.utbm.da50.fastandform.core.service.VerifyService;
 
 @RestController
 class EditController {
@@ -50,9 +53,10 @@ class EditController {
         return res;
     }
 
-    //http://localhost:8080/fastandform/users/207471947662098432
+    //http://localhost:8080/fastandform/users/xsara?type=name
     @PatchMapping(value = "/{DatabaseName}/{CollectionName}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String update(@RequestBody JsonNode jsonNode,@PathVariable String DatabaseName, @PathVariable String CollectionName, @PathVariable Integer id) throws Exception{
+    public String update(@RequestBody JsonNode jsonNode,@PathVariable String DatabaseName, 
+    @PathVariable String CollectionName, @PathVariable String id, @RequestParam String key) throws Exception{
 
         String data = jsonNode.toString();        
       // transform the json request body in hashmap
@@ -63,7 +67,7 @@ class EditController {
 
         //Write the data in Database
         if("ok".equals(res)){
-          entityservice.UpdateOneDocument(DatabaseName, CollectionName, mappingData,id);
+          entityservice.UpdateOneDocument(DatabaseName, CollectionName, mappingData,id, key);
         }
 
         return res;

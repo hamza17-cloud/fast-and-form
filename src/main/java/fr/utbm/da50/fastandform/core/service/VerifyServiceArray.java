@@ -1,20 +1,17 @@
 package fr.utbm.da50.fastandform.core.service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.jayway.jsonpath.internal.function.text.Length;
 
 import fr.utbm.da50.fastandform.core.entity.Rule;
 
 public class VerifyServiceArray {
 
     public VerifyServiceArray() {
+      // TODO document why this constructor is empty
     }
 
     public Boolean controlArray(List<Rule> rules, Object data, HashMap<String,String> mapInstance) throws ClassNotFoundException{
