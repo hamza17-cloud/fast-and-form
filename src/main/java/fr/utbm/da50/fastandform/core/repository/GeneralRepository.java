@@ -31,97 +31,86 @@ public class GeneralRepository {
     return list;
   }
 
-
   public String findOneDocumentById(String DatabaseName, String CollectionName, String id) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
     Document myDoc = data.find(eq("id", id)).first();
     return myDoc.toJson();
   }
-  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String id) {
+
+  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String username) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
- 
-    try  {
-      data.deleteOne(new Document ("id",id));  
-     long count= data.countDocuments();
-     System.out.println(count);
 
-    } catch (Exception e){
-      System.out.println(e);
-
-    }
-  
-
-  
-  }
-  public void DeleteManyDocMatchingSpecificID(String DatabaseName, String CollectionName, String username) {
-    final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
-    
-    try  {
-      data.deleteMany(new Document ("username",username));
-      long count= data.countDocuments();
+    try {
+      data.deleteOne(new Document("username", username));
+      long count = data.countDocuments();
       System.out.println(count);
 
-    } catch (Exception e){
+    } catch (Exception e) {
       System.out.println(e);
 
     }
-  
 
-   
-  }public void DeleteBy(String DatabaseName, String CollectionName,  String key, String valeur, Map<String, String> dataQuery){
-  //public void DeleteBy(String DatabaseName, String CollectionName,  String key, String val) {
+  }
+
+  public void DeleteManyDocMatchingSpecificID(String DatabaseName, String CollectionName, String username) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
-    
-    try  {
-      
-			//Document participants = new Document();
-		//	participants.append(name, null);
-   // Document username = new Document();
-		//username.append(String.format("username.%s", key), null);
 
+    try {
+      data.deleteMany(new Document("username", username));
+      long count = data.countDocuments();
+      System.out.println(count);
 
-      
-			Document document = new Document();
-    //  Collection<String> valeur = dataQuery.values();
+    } catch (Exception e) {
+      System.out.println(e);
+
+    }
+
+  }
+
+  public void DeleteBy(String DatabaseName, String CollectionName, String key, String valeur,
+      Map<String, String> dataQuery) {
+
+    final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
+
+    try {
+
+      Document document = new Document();
       document.append("$unset", dataQuery);
-      //document.append("$unset", valeur);
-      //document.append("$unset", );
-  
   
       UpdateResult result = data.updateOne(Filters.eq(key, valeur), document);
-  		if (result.getMatchedCount() != 1) {
+      if (result.getMatchedCount() != 1) {
         throw new IllegalStateException(
             String.format("Error occurred while deleting"));
       }
     } catch (RuntimeException error) {
-   
-    }
-  
 
-   
+    }
+
   }
-public void DeleteMatchingRecordsBy(String DatabaseName, String CollectionName,  String key, String valeur, Map<String, String> dataQuery){
-  //public void DeleteBy(String DatabaseName, String CollectionName,  String key, String val) {
+
+  public void DeleteMatchingRecordsBy(String DatabaseName, String CollectionName, String key, String valeur,
+      Map<String, String> dataQuery) {
+    // public void DeleteBy(String DatabaseName, String CollectionName, String key,
+    // String val) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
-    
-    try  {
-      
-			Document document = new Document();
+
+    try {
+
+      Document document = new Document();
       document.append("$unset", dataQuery);
-  
+
       UpdateResult result = data.updateMany(Filters.eq(key, valeur), document);
-  		if (result.getMatchedCount() != 1) {
+      if (result.getMatchedCount() != 1) {
         throw new IllegalStateException(
             String.format("Error occurred while deleting"));
       }
     } catch (RuntimeException error) {
-   
+
     }
-   
+
   }
 
-
-  public List<String> findOneDocumentBy(String DatabaseName, String CollectionName, String key, String val) {
+  public List<String> findListDocumentBy(String DatabaseName, String CollectionName, String key, String val) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
 
     FindIterable<Document> docs = data.find(eq(key, val));
@@ -133,7 +122,4 @@ public void DeleteMatchingRecordsBy(String DatabaseName, String CollectionName, 
     return list;
   }
 
-
- 
-  
 }
