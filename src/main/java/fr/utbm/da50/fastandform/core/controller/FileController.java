@@ -42,24 +42,24 @@ class FileController {
     // id).toString();
   }
 
-//exp : it will delete the first matching id in the url
-//http://localhost:8080/delete/fastandform/users/207471947662098432
+  // exp : it will delete the first matching id in the url
+  // http://localhost:8080/delete/fastandform/users/207471947662098432
   @GetMapping(value = "/delete/{DatabaseName}/{CollectionName}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public void DeleteOneDocById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
       @PathVariable String id) {
-   entityService.DeleteOneDocByspecificID(DatabaseName, CollectionName, id);
+    entityService.DeleteOneDocByspecificID(DatabaseName, CollectionName, id);
 
   }
-  // exp: if we have two matching usernames  in different docs it will delete both
-  //http://localhost:8080/Delete/fastandform/users/207471947662098432
-  //P.S:To delete all documents in a collection, pass in an empty document ({ })
+
+  // exp: if we have two matching usernames in different docs it will delete both
+  // http://localhost:8080/Delete/fastandform/users/207471947662098432
+  // P.S:To delete all documents in a collection, pass in an empty document ({ })
   @GetMapping(value = "/Delete/{DatabaseName}/{CollectionName}/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
   public void DeleteManyDocById(@PathVariable String DatabaseName, @PathVariable String CollectionName,
-      @PathVariable String username) { 
- entityService.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, username);
+      @PathVariable String username) {
+    entityService.DeleteManyDocMatchingSpecificID(DatabaseName, CollectionName, username);
 
   }
-
 
   @GetMapping(value = "/param/{DatabaseName}/{CollectionName}", produces = MediaType.APPLICATION_JSON_VALUE)
   // exemple : http://localhost:8080/param/fastandform/users?type=Developer
@@ -73,13 +73,18 @@ class FileController {
     String n = name.iterator().next();
     String v = valeur.iterator().next();
     return entityService
-        .findOneDocumentBy(DatabaseName, CollectionName, n, v).toString();
+        .findListDocumentBy(DatabaseName, CollectionName, n, v).toString();
 
     // return dataQuery.toString();
   }
-  //This method will delete the key and the value once it finds the record even if the key has other values , I am still working on deleting only the value without the Key!
-  //it will delete the first found matching value depending on the criterias from the params only
-  //you can try it on any type from collection users with a value to understand me
+
+  // This method will delete the key and the value once it finds the record even
+  // if the key has other values , I am still working on deleting only the value
+  // without the Key!
+  // it will delete the first found matching value depending on the criterias from
+  // the params only
+  // you can try it on any type from collection users with a value to understand
+  // me
   @GetMapping(value = "/params/{DatabaseName}/{CollectionName}", produces = MediaType.APPLICATION_JSON_VALUE)
   // exemple : http://localhost:8080/param/fastandform/users?type=Developer
   public void deleteByParams(@PathVariable String DatabaseName, @PathVariable String CollectionName,
@@ -91,11 +96,12 @@ class FileController {
     System.out.println(valeur.iterator().next());
     String n = name.iterator().next();
     String v = valeur.iterator().next();
-  // generalRepository.DeleteBy(DatabaseName, CollectionName, n, v);
-   generalRepository.DeleteBy(DatabaseName, CollectionName, n, v,dataQuery);
+    // generalRepository.DeleteBy(DatabaseName, CollectionName, n, v);
+    generalRepository.DeleteBy(DatabaseName, CollectionName, n, v, dataQuery);
 
   }
-  //it will delete all the records that match the same values directly 
+
+  // it will delete all the records that match the same values directly
   @GetMapping(value = "DeleteMany/{DatabaseName}/{CollectionName}", produces = MediaType.APPLICATION_JSON_VALUE)
   // exemple : http://localhost:8080/param/fastandform/users?type=Developer
   public void DeleteManyByParams(@PathVariable String DatabaseName, @PathVariable String CollectionName,
@@ -107,10 +113,9 @@ class FileController {
     System.out.println(valeur.iterator().next());
     String n = name.iterator().next();
     String v = valeur.iterator().next();
-  // generalRepository.DeleteBy(DatabaseName, CollectionName, n, v);
-   generalRepository.DeleteMatchingRecordsBy(DatabaseName, CollectionName, n, v, dataQuery);
+    // generalRepository.DeleteBy(DatabaseName, CollectionName, n, v);
+    generalRepository.DeleteMatchingRecordsBy(DatabaseName, CollectionName, n, v, dataQuery);
 
   }
-
 
 }
