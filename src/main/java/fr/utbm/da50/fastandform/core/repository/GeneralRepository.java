@@ -37,11 +37,11 @@ public class GeneralRepository {
     return myDoc.toJson();
   }
 
-  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String id) {
+  public void DeleteOneDocByspecificID(String DatabaseName, String CollectionName, String username) {
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
 
     try {
-      data.deleteOne(new Document("id", id));
+      data.deleteOne(new Document("username", username));
       long count = data.countDocuments();
       System.out.println(count);
 
@@ -69,23 +69,14 @@ public class GeneralRepository {
 
   public void DeleteBy(String DatabaseName, String CollectionName, String key, String valeur,
       Map<String, String> dataQuery) {
-    // public void DeleteBy(String DatabaseName, String CollectionName, String key,
-    // String val) {
+
     final MongoCollection<Document> data = client.getDatabase(DatabaseName).getCollection(CollectionName);
 
     try {
 
-      // Document participants = new Document();
-      // participants.append(name, null);
-      // Document username = new Document();
-      // username.append(String.format("username.%s", key), null);
-
       Document document = new Document();
-      // Collection<String> valeur = dataQuery.values();
       document.append("$unset", dataQuery);
-      // document.append("$unset", valeur);
-      // document.append("$unset", );
-
+  
       UpdateResult result = data.updateOne(Filters.eq(key, valeur), document);
       if (result.getMatchedCount() != 1) {
         throw new IllegalStateException(
