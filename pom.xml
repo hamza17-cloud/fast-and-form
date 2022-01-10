@@ -8,7 +8,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>fr.utbm.da50.fastandform</groupId>
-    <artifactId>core</artifactId>
+    <artifactId>fast-and-form</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>core</name>
     <description>Core project for Fast and Form</description>
@@ -61,10 +61,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>fr.utbm.da50.fastandform.core.UserApplication</mainClass>
-<!--                    <system-properties>  
-                        <property name="spring.batch.job.enabled" value="false"/>  
-                    </system-properties> -->
+                    <mainClass>fr.utbm.da50.fastandform.core.CoreApplication</mainClass>
                 </configuration>
                 
             </plugin>

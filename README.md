@@ -29,6 +29,16 @@ Install maven and setup project:
 mvn install
 ```
 
+## How to package as a jar
+```
+mvn -B package --file pom.xml
+```
+
+### Start the jar from dev environment
+```
+java -jar target/fast-and-form-0.0.1-SNAPSHOT.jar  --spring.config.location=src\main\resources\application.properties
+```
+
 ## How to start the jar
 
 The JAR does not include a application.properties file, so will need one to start it with your configuration.
