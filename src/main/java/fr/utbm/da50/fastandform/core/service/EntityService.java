@@ -1,6 +1,7 @@
 package fr.utbm.da50.fastandform.core.service;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class EntityService {
     this.loadEntities();
   }
 
-  public String[] getEntitiesLocation() {
+  public ArrayList<String> getEntitiesLocation() {
     return fastAndFormSettings.getEntitiesLocation();
   }
 

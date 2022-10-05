@@ -1,5 +1,6 @@
 package fr.utbm.da50.fastandform.core;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,15 +12,15 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix="ff")
 public class FastAndFormSettings {
 
-  private String[] entitiesLocation;
+  private ArrayList<String> entitiesLocation= new ArrayList<>();
 
   private static FastAndFormSettings instance;
 
-  public String[] getEntitiesLocation() {
+  public ArrayList<String> getEntitiesLocation() {
     return this.entitiesLocation;
   }
 
-  public void setEntitiesLocation(String[] entitiesLocation) {
+  public void setEntitiesLocation(ArrayList<String> entitiesLocation) {
     this.entitiesLocation = entitiesLocation;
   }
   
